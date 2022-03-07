@@ -1,10 +1,16 @@
 import './css/style.css';
+import init from './poseNet';
 
-function app() {
+(function app() {
     const el = document.createElement('h1');
     el.innerText = 'Hello World'
+    document.body.append(el);
 
-    return el;
-}
+    // buildBody();
 
-document.body.append(app());
+    window.setTimeout(init, 100);
+    // init();
+
+})();
+
+// document.body.append(app());

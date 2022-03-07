@@ -8,7 +8,7 @@ module.exports = {
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    clean: true
+    // clean: true
   },
   module: {
     rules: [
@@ -18,9 +18,18 @@ module.exports = {
       }
     ]
   },
-  plugins: [
-    new HtmlWebpackPlugin({
-      title: 'Testing Pose'
-    })
-  ]
+  // plugins: [
+  //   new HtmlWebpackPlugin({
+  //     title: 'Testing Pose'
+  //   })
+  // ],
+  experiments: {
+    // asyncWebAssembly: true,
+    // buildHttp: true,
+    // layers: true,
+    // lazyCompilation: true,
+    // outputModule: true,
+    // syncWebAssembly: true,
+    topLevelAwait: true,
+  },
 };
