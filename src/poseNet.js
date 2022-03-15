@@ -24,6 +24,11 @@ export default async function init() {
     canvas.width = video.videoWidth;
     canvas.height = video.videoHeight;
 
+    // the first detector call laggs, so im doing it before the loader is removed
+    await detector.estimatePoses(video)
+
+    document.getElementById('loader').style.display = 'none';
+
     let time = 6;
     let counter = document.getElementById('counter');
 
