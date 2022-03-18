@@ -13,6 +13,11 @@ ctx.lineWidth = 3;
 
 let hasntStarted = true;
 
+const joints = [
+    [10, 8, 6],
+    [5, 7, 9]
+];
+
 export default async function init() {
     await startVideo(video);
 
@@ -29,7 +34,7 @@ export default async function init() {
 
     document.getElementById('loader').style.display = 'none';
 
-    let time = 6;
+    let time = 1;
     let counter = document.getElementById('counter');
 
     let btn = document.getElementById('btn');
@@ -68,7 +73,7 @@ async function processVideo() {
     ctx.strokeStyle = 'White';
     ctx.lineWidth = 1;
 
-    if (pose?.keypoints)
+    if (pose?.keypoints) {
         poseDetection.util.getAdjacentPairs(poseDetection.SupportedModels.MoveNet).forEach(([
             i, j
         ]) => {
@@ -102,7 +107,35 @@ async function processVideo() {
             }
         });
 
+        for (let i = 0; i < 1; i++) {
+            const arc = new Path2D();
+            let center = pose.keypoints[joints[i][1]];
+            let v1 = sub(pose.keypoints[joints[i][0]], center);
+            let v2 = sub(pose.keypoints[joints[i][2]], center);
+
+            let radians = Math.acos(
+                (v1.x * v2.x + v1.y + v2.y) / (norm(v1) * norm(v2))
+            );
+
+            // console.log(radians * 180 / Math.PI)
+
+            // ctx.strokeStyle = 'Green';
+            // ctx.lineWidth = 2;
+            // arc.arc(center.x, center.y, 20, 0, -radians, false)
+            // ctx.stroke(arc);
+        }
+    }
     requestAnimationFrame(processVideo);
+}
+
+function sub(v1, v2) {
+    return { x: v1.x - v2.x, y: v1.y - v2.y }
+}
+
+function norm(v) {
+    return Math.sqrt(
+        v.x * v.x + v.y * v.y
+    )
 }
 
 async function startVideo(video) {
