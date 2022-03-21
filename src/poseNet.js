@@ -18,6 +18,15 @@ const joints = [
     [5, 7, 9]
 ];
 
+let pause = false;
+window.onkeydown = (e) => {
+    if (e.key == 'p')
+        pause = !pause;
+
+    if(!pause)
+        requestAnimationFrame(processVideo)
+}
+
 export default async function init() {
     await startVideo(video);
 
@@ -45,6 +54,8 @@ export default async function init() {
         count();
     }
 
+    btn.onclick();
+
     function count() {
         if (--time > 0) {
             counter.innerText = time.toString();
@@ -52,6 +63,7 @@ export default async function init() {
         }
         else {
             counter.style.display = 'none';
+            hasntStarted = false;
             processVideo();
         }
     }
@@ -113,19 +125,36 @@ async function processVideo() {
             let v1 = sub(pose.keypoints[joints[i][0]], center);
             let v2 = sub(pose.keypoints[joints[i][2]], center);
 
+            let p1 = pose.keypoints[joints[i][0]];
+            let p2 = pose.keypoints[joints[i][2]]
+
             let radians = Math.acos(
                 (v1.x * v2.x + v1.y + v2.y) / (norm(v1) * norm(v2))
             );
 
+            
             // console.log(radians * 180 / Math.PI)
+            
+            // let th2 = Math.atan2(center.y - v2.y, center.x - v2.x);
+            // inverter eixo y por causa dos eixos do canvas
+            let th2 = Math.atan2(p2.y - center.y, p2.x - center.x);
+            
+            let invert = false;
 
-            // ctx.strokeStyle = 'Green';
-            // ctx.lineWidth = 2;
-            // arc.arc(center.x, center.y, 20, 0, -radians, false)
-            // ctx.stroke(arc);
+            if(p1.y < center.y) {
+                invert = true;
+                radians *= -1;
+            }
+
+            ctx.strokeStyle = 'Green';
+            ctx.lineWidth = 2;
+            arc.arc(center.x, center.y, 20, th2, radians, invert)
+            ctx.stroke(arc);
         }
     }
-    requestAnimationFrame(processVideo);
+
+    if (!pause)
+        requestAnimationFrame(processVideo);
 }
 
 function sub(v1, v2) {
