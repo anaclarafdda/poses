@@ -5,14 +5,8 @@
   <meta charset="utf-8">
   <title>Testing Pose</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      margin: 0 auto;
-      padding: 0;
-      overflow: hidden;
-      background-color: black;
-    }
 
+  <style>
     #start {
       display: table;
       position: absolute;
@@ -21,6 +15,7 @@
       width: 100vw;
       height: 100vh;
       z-index: 200;
+      background-color: black;
     }
 
     .center-vertically {
@@ -63,24 +58,6 @@
       padding-left: 0.25em;
     }
 
-    #output {
-      width: 100vw;
-      height: auto;
-      overflow: hidden;
-      display: block;
-      margin: auto;
-    }
-
-    .canvas-container {
-      margin: 0;
-      position: absolute;
-      top: 50%;
-      -ms-transform: translateY(-50%);
-      transform: translateY(-50%);
-      width: inherit;
-    }
-
-
     #loader {
       margin: auto;
 
@@ -104,17 +81,74 @@
       }
     }
 
-    @media screen and (min-width: 1024px) {
-      #output {
-        width: auto;
-        height: 100vh;
+    html,
+    body {
+      margin: 0 auto;
+      height: 100%;
+      width: 100%;
+      background-color: black;
+    }
+
+    .canvas-container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    #bar {
+      display: flex;
+      flex-direction: column;
+      background-color: aliceblue;
+      flex-basis: 15%;
+      flex-grow: 1;
+      /* overflow-x: hidden; */
+    }
+
+    #bar p {
+      padding-left: 0.75em;
+      padding-right: 0.5em;
+
+    }
+
+    #bar-header {
+      color: whitesmoke;
+      background-color: #008CBA;
+      margin-top: 0;
+      padding-top: 0.8em;
+      padding-bottom: 0.8em;
+      text-align: center;
+    }
+
+    #cnv {
+      display: flex;
+      flex-wrap: wrap;
+      overflow: hidden;
+    }
+
+    #output {
+      width: 100%;
+    }
+
+    @media screen and (min-width: 768px) {
+      .canvas-container {
+        display: flex;
+        flex-direction: row;
+        align-content: space-between;
+        height: 100%;
+        width: inherit;
         overflow: hidden;
-        display: inline;
       }
 
-      .canvas-container {
-        width: 100%;
-        text-align: center;
+      #bar {
+        height: 100%;
+        overflow-y: auto;
+        border-left: 1px solid black;
+      }
+
+      #cnv {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 82%;
       }
     }
   </style>
@@ -122,7 +156,42 @@
 
 <body>
   <div class="canvas-container">
-    <canvas id="output"></canvas>
+    <div id="cnv">
+      <canvas id="output"></canvas>
+    </div>
+
+    <div id="bar">
+      <h1 id="bar-header">Elevacao Lateral</h1>
+
+      <p><b>Repetições:</b></p>
+
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit reiciendis enim quae dolores illum distinctio
+        eveniet, nihil odio cum, ullam assumenda! Laudantium eveniet voluptate eaque dolorum, assumenda ipsam magni
+        aliquid? Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex impedit repudiandae incidunt blanditiis
+        officiis. Sed recusandae voluptate veniam non ut harum hic error magni. Non numquam quia veniam totam rerum.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas odio, placeat quidem saepe labore voluptates
+        rem, laudantium ipsa molestias, possimus quae amet tempore vitae omnis quos recusandae reprehenderit cupiditate
+        obcaecati. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam molestiae culpa repellat magnam fugit
+        praesentium dolores dolor laborum esse labore officia rem, quasi sed a quos, nam omnis maiores? Saepe.</p>
+
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit reiciendis enim quae dolores illum distinctio
+        eveniet, nihil odio cum, ullam assumenda! Laudantium eveniet voluptate eaque dolorum, assumenda ipsam magni
+        aliquid? Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex impedit repudiandae incidunt blanditiis
+        officiis. Sed recusandae voluptate veniam non ut harum hic error magni. Non numquam quia veniam totam rerum.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas odio, placeat quidem saepe labore voluptates
+        rem, laudantium ipsa molestias, possimus quae amet tempore vitae omnis quos recusandae reprehenderit cupiditate
+        obcaecati. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam molestiae culpa repellat magnam fugit
+        praesentium dolores dolor laborum esse labore officia rem, quasi sed a quos, nam omnis maiores? Saepe.</p>
+
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit reiciendis enim quae dolores illum distinctio
+        eveniet, nihil odio cum, ullam assumenda! Laudantium eveniet voluptate eaque dolorum, assumenda ipsam magni
+        aliquid? Lorem ipsum dolor sit amet consectetur adipisicing elit. Ex impedit repudiandae incidunt blanditiis
+        officiis. Sed recusandae voluptate veniam non ut harum hic error magni. Non numquam quia veniam totam rerum.
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas odio, placeat quidem saepe labore voluptates
+        rem, laudantium ipsa molestias, possimus quae amet tempore vitae omnis quos recusandae reprehenderit cupiditate
+        obcaecati. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam molestiae culpa repellat magnam fugit
+        praesentium dolores dolor laborum esse labore officia rem, quasi sed a quos, nam omnis maiores? Saepe.</p>
+    </div>
   </div>
 
   <span id="start">

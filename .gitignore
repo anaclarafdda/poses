@@ -1,4 +1,4 @@
 node_modules/
 webpack-demo/
-dist/*
-!dist/index.html
+dist/*.js
+dist/*.txt

@@ -47,7 +47,7 @@ export default async function init() {
     // the first detector call laggs, so im doing it before the loader is removed
     await detector.estimatePoses(video)
 
-    document.getElementById('loader').style.display = 'none';
+    document.getElementById('start').style.display = 'none';
 
     let time = 1;
     let counter = document.getElementById('counter');
@@ -186,7 +186,7 @@ async function startVideo(video) {
     const constraints = {
         video: {
             facingMode: "user",
-            width: { ideal: 640 },
+            width: { ideal: 852 },
             height: { ideal: 480 }
         },
         audio: false
