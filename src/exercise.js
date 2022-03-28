@@ -13,6 +13,8 @@ export default class Exercise {
         this.restInterval = null;
         this.finished = false;
 
+        this.needsReset = { left: false, right: false };
+        this.reseted = { left: true, right: true };
 
         document.getElementById('sets-max').innerText = this.setMax;
         this.sets = document.getElementById('sets');
@@ -42,8 +44,6 @@ export default class Exercise {
             this.rest = document.getElementById('rest');
             this.rest.innerText = this.restTime.toString();
         }
-
-        this.lastResult = { left: false, right: false };
     }
 
     /**
@@ -55,23 +55,41 @@ export default class Exercise {
         throw new Error('Verify function not implemented!');
     }
 
+    /**
+     * Recebe os keypoints estimados e retorna a se o exercicio pode ser contabilizado novamente
+     * @param {array} keypoints 
+     * @return {object} {left: [boolean], right: [boolean]} 
+     */
+    reset(keypoint) {
+        throw new Error('Reset function not implemented!');
+    }
+
     test(keypoints) {
         if (this.isResting || this.finished) return;
 
         let result = this.verify(keypoints);
+        let reset = this.reset();
 
         for (let side of ['left', 'right']) {
-            if (result[side] && !this.lastResult[side]) {
+            if (this.reseted[side] && result[side]) {
                 if (this[`${side}Count`] < this[`${side}Max`]) {
                     this[`${side}Count`] += 1;
                     this[`${side}Reps`].innerText = this[`${side}Count`].toString();
+
+                    this.reseted[side] = false;
+                    this.needsReset[side] = true;
+
                     console.log('Completado ' + side);
                 }
+            }
+            if (this.needsReset[side]){
+                this.reseted[side] = reset[side];
+                this.needsReset[side] = !reset[side];
             }
         }
 
         if (
-            (this.leftMax <= 0 || this.leftCount == this.leftMax)   
+            (this.leftMax <= 0 || this.leftCount == this.leftMax)
             && (this.rightMax <= 0 || this.rightCount == this.rightMax)
         ) {
             console.log('Serie completada!');
@@ -103,7 +121,5 @@ export default class Exercise {
                 this.finished = true;
             }
         }
-
-        this.lastResult = result;
     }
 }
