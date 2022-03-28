@@ -195,7 +195,7 @@ async function processVideo() {
         }
     }
 
-    lateralRaise.test();
+    lateralRaise.update();
 
     if (!pause)
         requestAnimationFrame(processVideo);

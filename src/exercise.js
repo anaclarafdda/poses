@@ -64,7 +64,7 @@ export default class Exercise {
         throw new Error('Reset function not implemented!');
     }
 
-    test(keypoints) {
+    update(keypoints) {
         if (this.isResting || this.finished) return;
 
         let result = this.verify(keypoints);
@@ -72,9 +72,17 @@ export default class Exercise {
 
         for (let side of ['left', 'right']) {
             if (this.reseted[side] && result[side]) {
-                if (this[`${side}Count`] < this[`${side}Max`]) {
-                    this[`${side}Count`] += 1;
-                    this[`${side}Reps`].innerText = this[`${side}Count`].toString();
+                let counter = `${side}Count`;
+                let element = `${side}Reps`;
+
+                if (this[counter] < this[`${side}Max`]) {
+                    this[counter] += 1;
+                    this[element].innerText = this[counter].toString();
+                    this[element].classList.add('green');
+
+                    setTimeout(() => {
+                        this[element].classList.remove('green');
+                    }, 500);
 
                     this.reseted[side] = false;
                     this.needsReset[side] = true;
@@ -96,8 +104,11 @@ export default class Exercise {
             this.leftCount = 0;
             this.rightCount = 0;
 
-            this.leftReps.innerText = '0';
-            this.rightReps.innerText = '0';
+            setTimeout(() => {
+                this.leftReps.innerText = '0';
+                this.rightReps.innerText = '0';
+            }, 500);
+            
             this.setCount += 1;
             this.sets.innerHTML = this.setCount.toString();
 
