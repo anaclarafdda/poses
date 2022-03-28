@@ -5,14 +5,8 @@
   <meta charset="utf-8">
   <title>Testing Pose</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      margin: 0 auto;
-      padding: 0;
-      overflow: hidden;
-      background-color: black;
-    }
 
+  <style>
     #start {
       display: table;
       position: absolute;
@@ -21,6 +15,7 @@
       width: 100vw;
       height: 100vh;
       z-index: 200;
+      background-color: black;
     }
 
     .center-vertically {
@@ -63,24 +58,6 @@
       padding-left: 0.25em;
     }
 
-    #output {
-      width: 100vw;
-      height: auto;
-      overflow: hidden;
-      display: block;
-      margin: auto;
-    }
-
-    .canvas-container {
-      margin: 0;
-      position: absolute;
-      top: 50%;
-      -ms-transform: translateY(-50%);
-      transform: translateY(-50%);
-      width: inherit;
-    }
-
-
     #loader {
       margin: auto;
 
@@ -91,7 +68,7 @@
       border-radius: 50%;
       width: 120px;
       height: 120px;
-      animation: spin 2s linear infinite;
+      animation: spin 1s linear infinite;
     }
 
     @keyframes spin {
@@ -104,40 +81,137 @@
       }
     }
 
-    @media screen and (min-width: 1024px) {
-      #output {
-        width: auto;
-        height: 100vh;
+    html,
+    body {
+      margin: 0 auto;
+      height: 100%;
+      width: 100%;
+      background-color: black;
+      /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .canvas-container {
+      display: flex;
+      flex-direction: column;
+    }
+
+    #bar {
+      display: flex;
+      flex-direction: column;
+      background-color: aliceblue;
+      flex-basis: 15%;
+      flex-grow: 1;
+      background-color: #194554;
+      /* overflow-x: hidden; */
+    }
+
+    #bar p {
+      padding-left: 0.75em;
+      padding-right: 0.5em;
+
+    }
+
+    .bar-header {
+      color: whitesmoke;
+      /* background-color: #008CBA; */
+      background-color: #3BA3C6;
+      margin: 0;
+      padding-top: 0.3em;
+      padding-bottom: 0.3em;
+      text-align: center;
+      border-bottom: 1px solid white;
+    }
+
+    #cnv {
+      display: flex;
+      flex-wrap: wrap;
+      overflow: hidden;
+    }
+
+    #output {
+      width: 100%;
+    }
+
+    @media screen and (min-width: 768px) {
+      .canvas-container {
+        display: flex;
+        flex-direction: row;
+        align-content: space-between;
+        height: 100%;
+        width: inherit;
         overflow: hidden;
-        display: inline;
       }
 
-      .canvas-container {
-        width: 100%;
-        text-align: center;
+      #bar {
+        height: 100%;
+        overflow-y: auto;
+        /* border-left: 3px groove gray; */
+        box-shadow: -1px 0px 10px black;
       }
+
+      #cnv {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 82%;
+      }
+    }
+
+    hr {
+      /* background-color: white; */
+      width: 60%;
+      color: rgba(255, 255, 255, 0.25);
+      margin-top: 0;
     }
   </style>
 </head>
 
 <body>
   <div class="canvas-container">
-    <canvas id="output"></canvas>
-  </div>
-
-  <span id="start">
-    <div class="center-vertically">
-      <button id="btn">Start</button>
-      <p id="counter">5</p>
-      <div id="loader"></div>
+    <div id="cnv">
+      <canvas id="output"></canvas>
     </div>
-  </span>
 
-  <video id="video" playsinline
-    style="-webkit-transform: scaleX(-1); transform: scaleX(-1); display: none; width: auto; height: auto;">
-  </video>
+    <div id="bar">
+      <h1 class="bar-header"><b>Elevação Lateral</b></h1>
 
-  <script defer src="index.bundle.js"></script>
+      <div class="bar-header" style="background-color: #008CBA;">
+        <h1>Repetições</h1>
+        <hr>
+
+        <h1 id="header-left">Esquerda:</h1>
+        <h1 id="counter-left"><span id="reps-left">0</span> / <span id="reps-left-max">12</span></h1>
+
+        <h1 id="header-right">Direita:</h1>
+        <h1 id="counter-right"><span id="reps-right">0</span> / <span id="reps-right-max">12</span></h1>
+      </div>
+
+      <div class="bar-header" style="background-color: #006587;">
+        <h1> Séries:</h1>
+        <h1><span id="sets">0</span> / <span id="sets-max">3</span></h1>
+      </div>
+
+      <div id="rest-wrapper" class="bar-header" style="background-color: #002C3B;">
+        <h1> Descanso:</h1>
+        <h1><span id="rest">30</span> s</h1>
+      </div>
+
+    </div>
+
+    <span id="start">
+      <div class="center-vertically">
+        <button id="btn">Start</button>
+        <p id="counter">5</p>
+        <div id="loader"></div>
+      </div>
+    </span>
+
+    <video id="video" playsinline
+      style="-webkit-transform: scaleX(-1); transform: scaleX(-1); display: none; width: auto; height: auto;">
+    </video>
+
+    <script defer src="index.bundle.js"></script>
 </body>
 
 </html>
