@@ -18,6 +18,20 @@
       background-color: black;
     }
 
+    .green {
+      color: greenyellow;
+      font-size: 1.5em;
+      transition: color 100ms, font-size 100ms;
+      -webkit-transition: color 100ms, font-size 100ms;
+    }
+
+    .white {
+      color: white;
+      font-size: 1em;
+      transition: color 100ms, font-size 100ms;
+      -webkit-transition: color 100ms, font-size 100ms;
+    }
+
     .center-vertically {
       margin: 0;
       position: absolute;
@@ -164,6 +178,29 @@
       color: rgba(255, 255, 255, 0.25);
       margin-top: 0;
     }
+
+    #msg {
+      /* display: none; */
+      position: absolute;
+      top: 5%;
+      margin: auto;
+      width: 20%;
+      color: white;
+      text-align: center;
+      font-size: 2em;
+      padding: 0.3em;
+      background-color: rgba(0, 151, 201, 0.7);
+    }
+
+    .show {
+      opacity: 1;
+      transition: opacity 500ms;
+    }
+
+    .hide {
+      opacity: 0;
+      transition: opacity 500ms;
+    }
   </style>
 </head>
 
@@ -171,6 +208,7 @@
   <div class="canvas-container">
     <div id="cnv">
       <canvas id="output"></canvas>
+      <div id="msg" class="hide">Série completada!</div>
     </div>
 
     <div id="bar">
