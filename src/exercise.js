@@ -86,8 +86,6 @@ export default class Exercise {
 
                     this.reseted[side] = false;
                     this.needsReset[side] = true;
-
-                    console.log('Completado ' + side);
                 }
             }
             if (this.needsReset[side]) {
@@ -100,13 +98,18 @@ export default class Exercise {
             (this.leftMax <= 0 || this.leftCount == this.leftMax)
             && (this.rightMax <= 0 || this.rightCount == this.rightMax)
         ) {
-            console.log('Serie completada!');
             this.leftCount = 0;
             this.rightCount = 0;
 
             this.setCount += 1;
             this.sets.innerHTML = this.setCount.toString();
             this.sets.className = 'green';
+
+            document.getElementById('msg').className = 'show';
+
+            setTimeout(() => {
+                document.getElementById('msg').className = 'hide';
+            }, 3000);
 
             setTimeout(() => {
                 this.sets.className = 'white';
