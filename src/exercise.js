@@ -78,10 +78,10 @@ export default class Exercise {
                 if (this[counter] < this[`${side}Max`]) {
                     this[counter] += 1;
                     this[element].innerText = this[counter].toString();
-                    this[element].classList.add('green');
+                    this[element].className = 'green';
 
                     setTimeout(() => {
-                        this[element].classList.remove('green');
+                    this[element].className = 'white';
                     }, 500);
 
                     this.reseted[side] = false;
@@ -90,7 +90,7 @@ export default class Exercise {
                     console.log('Completado ' + side);
                 }
             }
-            if (this.needsReset[side]){
+            if (this.needsReset[side]) {
                 this.reseted[side] = reset[side];
                 this.needsReset[side] = !reset[side];
             }
@@ -104,13 +104,15 @@ export default class Exercise {
             this.leftCount = 0;
             this.rightCount = 0;
 
+            this.setCount += 1;
+            this.sets.innerHTML = this.setCount.toString();
+            this.sets.className = 'green';
+
             setTimeout(() => {
+                this.sets.className = 'white';
                 this.leftReps.innerText = '0';
                 this.rightReps.innerText = '0';
             }, 500);
-            
-            this.setCount += 1;
-            this.sets.innerHTML = this.setCount.toString();
 
             if (this.setCount < this.setMax) {
 
