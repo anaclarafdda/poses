@@ -1,6 +1,7 @@
 
 import * as poseDetection from '@tensorflow-models/pose-detection';
 import '@tensorflow/tfjs-backend-webgl';
+import Exercise from './exercise';
 
 const detector = await poseDetection.createDetector(poseDetection.SupportedModels.MoveNet);
 const scoreThreshold = 0.5;
@@ -31,6 +32,18 @@ window.onkeydown = (e) => {
 
     if (!pause)
         requestAnimationFrame(processVideo)
+}
+
+const deg5 = Math.PI / 36;
+const deg90 = Math.PI / 2;
+let rightShoulder = 0, leftShoulder = 0;
+const lateralRaise = new Exercise(3, 2, 2, 3);
+
+lateralRaise.verify = (keipoints) => {
+    return {
+        left: (leftShoulder > (deg90 - deg5) && leftShoulder < (deg90 + deg5)),
+        right: (rightShoulder > (deg90 - deg5) && rightShoulder < (deg90 + deg5))
+    }
 }
 
 export default async function init() {
@@ -157,6 +170,9 @@ async function processVideo() {
                 radians -= Math.PI / 2
             }
 
+            if (i == 4) rightShoulder = radians;
+            if (i == 5) leftShoulder = radians;
+
             let offset = i % 2 == 0 ? -40 : 10;
 
             ctx.font = "20px Arial";
@@ -165,6 +181,8 @@ async function processVideo() {
 
         }
     }
+
+    lateralRaise.test();
 
     if (!pause)
         requestAnimationFrame(processVideo);
