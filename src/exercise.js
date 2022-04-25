@@ -1,5 +1,5 @@
 export default class Exercise {
-    constructor(props) { // {sets: 0, leftReps: 0, rightReps: 0, rest: 0}
+    constructor(props) { // {sets: 0, leftReps: 0, rightReps: 0, rest: 0, name: "-"}
         this.setMax = props.sets || 0;
         this.leftMax = props.leftReps || 0
         this.rightMax = props.rightReps || 0;
@@ -18,6 +18,10 @@ export default class Exercise {
 
         document.getElementById('sets-max').innerText = this.setMax;
         this.sets = document.getElementById('sets');
+
+        if(typeof props.name === 'string' && props.name.length > 0) {
+            document.getElementById('exercise-name').innerText = props.name;
+        }
 
         if (props.leftReps <= 0) {
             document.getElementById('header-left').style.display = 'none';

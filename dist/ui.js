@@ -14,7 +14,7 @@ customElements.define('user-interface', class extends HTMLElement {
                 </div>
             
                 <div id="bar">
-                    <h1 class="bar-header"><b>Elevação Lateral</b></h1>
+                    <h1 id="exercise-name" class="bar-header"><b> - </b></h1>
             
                     <div class="bar-header" style="background-color: #008CBA;">
                         <h1>Repetições</h1>
