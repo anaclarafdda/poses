@@ -1,9 +1,9 @@
 export default class Exercise {
-    constructor(sets, leftReps, rightReps, rest) {
-        this.setMax = sets || 0;
-        this.leftMax = leftReps || 0
-        this.rightMax = rightReps || 0;
-        this.restTime = rest || 0;
+    constructor(props) { // {sets: 0, leftReps: 0, rightReps: 0, rest: 0}
+        this.setMax = props.sets || 0;
+        this.leftMax = props.leftReps || 0
+        this.rightMax = props.rightReps || 0;
+        this.restTime = props.rest || 0;
 
         this.setCount = 0;
         this.leftCount = 0;
@@ -19,21 +19,21 @@ export default class Exercise {
         document.getElementById('sets-max').innerText = this.setMax;
         this.sets = document.getElementById('sets');
 
-        if (leftReps <= 0) {
+        if (props.leftReps <= 0) {
             document.getElementById('header-left').style.display = 'none';
             document.getElementById('counter-left').style.display = 'none';
         }
         else {
-            document.getElementById('reps-left-max').innerText = leftReps.toString();
+            document.getElementById('reps-left-max').innerText = props.leftReps.toString();
             this.leftReps = document.getElementById('reps-left');
         }
 
-        if (rightReps <= 0) {
+        if (props.rightReps <= 0) {
             document.getElementById('header-right').style.display = 'none';
             document.getElementById('counter-right').style.display = 'none';
         }
         else {
-            document.getElementById('reps-right-max').innerText = rightReps.toString();
+            document.getElementById('reps-right-max').innerText = props.rightReps.toString();
             this.rightReps = document.getElementById('reps-right');
         }
 

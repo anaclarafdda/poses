@@ -38,7 +38,7 @@ const deg5 = Math.PI / 36;
 const deg90 = Math.PI / 2;
 const deg30 = Math.PI / 6;
 let rightShoulder = 0, leftShoulder = 0;
-const lateralRaise = new Exercise(3, 2, 2, 3);
+const lateralRaise = new Exercise({sets: 3, leftReps: 2, rightReps: 2, rest: 3});
 
 let vleft = false, vright = false;
 
