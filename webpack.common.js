@@ -3,12 +3,14 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: {
-    index: './src/index.js',
+    lateralRaise: './src/js/exercises/LateralRaise.js',
+    legRaise: './src/js/exercises/LegRaise.js',
+    ui: './src/js/ui.js',
   },
   output: {
     filename: '[name].bundle.js',
     path: path.resolve(__dirname, 'dist'),
-    // clean: true
+    clean: true
   },
   module: {
     rules: [
@@ -18,18 +20,32 @@ module.exports = {
       }
     ]
   },
-  // plugins: [
-  //   new HtmlWebpackPlugin({
-  //     title: 'Testing Pose'
-  //   })
-  // ],
+  plugins: [
+    new HtmlWebpackPlugin({
+      title: 'Home FisioVR',
+      template: './src/index.html',
+      chunks: []
+    }),
+    new HtmlWebpackPlugin({
+      title: 'Exercise',
+      filename: 'lateralRaise.html',
+      template: './src/exercise.html',
+      chunks: ['lateralRaise', 'ui']
+    }),
+    new HtmlWebpackPlugin({
+      title: 'Exercise',
+      filename: 'legRaise.html',
+      template: './src/exercise.html',
+      chunks: ['legRaise', 'ui']
+    }),
+  ],
   experiments: {
+    topLevelAwait: true,
     // asyncWebAssembly: true,
     // buildHttp: true,
     // layers: true,
     // lazyCompilation: true,
     // outputModule: true,
     // syncWebAssembly: true,
-    topLevelAwait: true,
   },
 };

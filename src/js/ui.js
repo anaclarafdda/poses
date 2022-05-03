@@ -1,7 +1,8 @@
+import '../css/ui.css';
+
 customElements.define('user-interface', class extends HTMLElement {
     constructor() {
         super();
-        // 
     }
 
     connectedCallback() {
