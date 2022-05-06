@@ -14,14 +14,14 @@ ctx.lineWidth = 3;
 let hasntStarted = true;
 
 const joints = [
-    [10, 8, 6], // right elbow
-    [9, 7, 5], // left elbow
-    [16, 14, 12], // right knee
-    [15, 13, 11], // left knee
-    [8, 6], // right shoulder
-    [7, 5], // left shoulder
-    [14, 12], // right hip
-    [13, 11], // left hip
+    [10, 8, 6], // right elbow - 0 
+    [9, 7, 5], // left elbow - 1
+    [16, 14, 12], // right knee - 2
+    [15, 13, 11], // left knee - 3
+    [8, 6], // right shoulder - 4
+    [7, 5], // left shoulder - 5 
+    [14, 12], // right hip - 6 
+    [13, 11], // left hip - 7
 ];
 export const angles = new Array(8);
 

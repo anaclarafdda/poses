@@ -24,6 +24,7 @@ lateralRaise.verify = (keipoints) => {
 lateralRaise.reset = () => {
     rightShoulder = angles[4];
     leftShoulder = angles[5];
+    
 
     return {
         left: (leftShoulder < deg90 - deg5 - deg5),
